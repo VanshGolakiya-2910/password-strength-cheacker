@@ -1,6 +1,4 @@
-Here’s a `README.md` file for your password strength checker project:
 
-```markdown
 # Password Strength Checker
 
 This project is an Angular-based Password Strength Checker that evaluates the strength of a password based on various criteria. The tool supports three modes: Basic, Intermediate, and Advanced, each with increasing levels of complexity in the evaluation process.
