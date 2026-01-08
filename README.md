@@ -90,6 +90,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 For any inquiries or support, please reach out to Vansh Golakiya at [vanshgolakiy5011@gmail.com](mailto:vanshgolakiy5011@gmail.com).
-```
-
-You can adjust the content as needed and add more details about the project if necessary.
