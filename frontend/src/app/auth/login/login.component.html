@@ -1,0 +1,29 @@
+<div class="auth-shell">
+  <div class="auth-card">
+    <h2>Welcome back</h2>
+    <p class="subtext">Log in to continue saving and tracking passwords.</p>
+
+    <form (ngSubmit)="submit()" class="auth-form">
+      <div class="mb-3">
+        <label class="form-label">Username or Email</label>
+        <input class="form-control" [(ngModel)]="identifier" name="identifier" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" [(ngModel)]="password" name="password" required>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+      <button class="btn btn-primary w-100" type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <span>Don't have an account?</span>
+      <a routerLink="/register">Create one</a>
+    </div>
+  </div>
+</div>

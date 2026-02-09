@@ -1,0 +1,24 @@
+<nav class="top-nav">
+	<div class="brand" routerLink="/">
+		<span class="logo">PSC</span>
+		<span class="name">Password Strength Checker</span>
+	</div>
+	<div class="nav-actions">
+		<ng-container *ngIf="currentUser; else guestLinks">
+			<div class="user-chip">
+				<span class="avatar">{{ currentUser.username.charAt(0) | uppercase }}</span>
+				<div>
+					<div class="username">{{ currentUser.username }}</div>
+					<div class="email">{{ currentUser.email }}</div>
+				</div>
+			</div>
+			<button class="btn btn-outline-secondary" (click)="logout()">Sign out</button>
+		</ng-container>
+		<ng-template #guestLinks>
+			<a class="btn btn-outline-secondary" routerLink="/login">Sign in</a>
+			<a class="btn btn-primary" routerLink="/register">Create account</a>
+		</ng-template>
+	</div>
+</nav>
+
+<router-outlet></router-outlet>
