@@ -24,6 +24,32 @@
   margin-bottom: 20px;
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper .form-control {
+  padding-right: 40px;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.btn-toggle-password:hover {
+  color: #334155;
+}
+
 .auth-footer {
   margin-top: 16px;
   text-align: center;
@@ -34,3 +60,4 @@
   margin-left: 6px;
   font-weight: 600;
 }
+.progress-bar.bg-success { background-color: #22c55e; }

@@ -45,6 +45,13 @@ exports.register = async (req, res) => {
     const savedUser = await newUser.save();
     const token = createToken(savedUser);
 
+    res.cookie('psc_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
     return res.status(201).json({
       message: 'User registered successfully',
       data: sanitizeUser(savedUser),
@@ -79,6 +86,13 @@ exports.login = async (req, res) => {
 
     const token = createToken(user);
 
+    res.cookie('psc_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
     return res.json({
       message: 'Login successful',
       data: sanitizeUser(user),
@@ -89,8 +103,13 @@ exports.login = async (req, res) => {
   }
 };
 
-// Logout user (client should discard token)
+// Logout user
 exports.logout = async (req, res) => {
+  res.clearCookie('psc_token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'Lax'
+  });
   return res.json({ message: 'Logged out successfully' });
 };
 

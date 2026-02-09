@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,8 +12,20 @@ export class LoginComponent {
   password = '';
   isSubmitting = false;
   errorMessage = '';
+  returnUrl = '';
+  showPassword = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
   submit(): void {
     this.errorMessage = '';
@@ -26,7 +38,7 @@ export class LoginComponent {
     this.authService.login({ identifier: this.identifier, password: this.password }).subscribe({
       next: () => {
         this.isSubmitting = false;
-        this.router.navigate(['/']);
+        this.router.navigate([this.returnUrl]);
       },
       error: (error) => {
         this.isSubmitting = false;

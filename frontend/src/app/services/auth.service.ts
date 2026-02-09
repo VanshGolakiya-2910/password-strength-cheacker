@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 export interface AuthUser {
@@ -23,32 +23,22 @@ interface AuthResponse {
 })
 export class AuthService {
   private apiUrl = 'http://localhost:5000/api/auth';
-  private tokenKey = 'psc_token';
   private userSubject = new BehaviorSubject<AuthUser | null>(null);
 
   user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  get token(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  }
-
-  setToken(token: string | null): void {
-    if (token) {
-      localStorage.setItem(this.tokenKey, token);
-    } else {
-      localStorage.removeItem(this.tokenKey);
-    }
+  get currentUser(): AuthUser | null {
+    return this.userSubject.getValue();
   }
 
   isAuthenticated(): boolean {
-    return !!this.token;
+    return this.currentUser !== null;
   }
 
   loadCurrentUser(): Observable<AuthResponse> {
-    const headers = new HttpHeaders({ Authorization: `Bearer ${this.token}` });
-    return this.http.get<AuthResponse>(`${this.apiUrl}/me`, { headers }).pipe(
+    return this.http.get<AuthResponse>(`${this.apiUrl}/me`, { withCredentials: true }).pipe(
       tap((response) => this.userSubject.next(response.data))
     );
   }
@@ -60,31 +50,24 @@ export class AuthService {
     firstName?: string;
     lastName?: string;
   }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, payload).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, payload, { withCredentials: true }).pipe(
       tap((response) => {
-        if (response.token) {
-          this.setToken(response.token);
-        }
         this.userSubject.next(response.data);
       })
     );
   }
 
   login(payload: { identifier: string; password: string }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, payload).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, payload, { withCredentials: true }).pipe(
       tap((response) => {
-        if (response.token) {
-          this.setToken(response.token);
-        }
         this.userSubject.next(response.data);
       })
     );
   }
 
   logout(): Observable<{ message: string }> {
-    return this.http.post<{ message: string }>(`${this.apiUrl}/logout`, {}).pipe(
+    return this.http.post<{ message: string }>(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
       tap(() => {
-        this.setToken(null);
         this.userSubject.next(null);
       })
     );

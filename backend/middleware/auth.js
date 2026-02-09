@@ -1,16 +1,19 @@
 const jwt = require('jsonwebtoken');
 
-const getTokenFromHeader = (req) => {
-  const authHeader = req.headers.authorization || '';
-  const parts = authHeader.split(' ');
-  if (parts.length === 2 && parts[0] === 'Bearer') {
-    return parts[1];
+const getTokenFromCookie = (req) => {
+  const cookieHeader = req.headers.cookie || '';
+  const cookies = cookieHeader.split(';').map(c => c.trim());
+  
+  for (let cookie of cookies) {
+    if (cookie.startsWith('psc_token=')) {
+      return cookie.substring('psc_token='.length);
+    }
   }
   return null;
 };
 
 const authMiddleware = (req, res, next) => {
-  const token = getTokenFromHeader(req);
+  const token = getTokenFromCookie(req);
   if (!token) {
     return res.status(401).json({ message: 'Missing authorization token' });
   }

@@ -30,6 +30,91 @@
   gap: 12px;
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper .form-control {
+  padding-right: 40px;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.btn-toggle-password:hover {
+  color: #334155;
+}
+
+.strength-row {
+  display: grid;
+  gap: 10px;
+}
+
+.strength-meter {
+  height: 10px;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.strength-meter .progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s ease-in-out;
+}
+
+.strength-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.strength-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  background: #e2e8f0;
+}
+
+.pill-very-weak { background: #fee2e2; color: #b91c1c; }
+.pill-weak { background: #fef3c7; color: #92400e; }
+.pill-medium { background: #cffafe; color: #0e7490; }
+.pill-strong { background: #dbeafe; color: #1d4ed8; }
+.pill-very-strong { background: #dcfce7; color: #166534; }
+
+.score {
+  color: #475569;
+  font-weight: 600;
+}
+
+.feedback-small {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-small {
+  padding: 4px 8px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: #475569;
+  display: inline-block;
+}
+
 .auth-footer {
   margin-top: 16px;
   text-align: center;
@@ -45,4 +130,14 @@
   .grid-2 {
     grid-template-columns: 1fr;
   }
+
+  .password-input-group {
+    flex-direction: column;
+  }
 }
+
+.progress-bar.bg-danger { background-color: #ef4444; }
+.progress-bar.bg-warning { background-color: #f59e0b; }
+.progress-bar.bg-info { background-color: #06b6d4; }
+.progress-bar.bg-primary { background-color: #3b82f6; }
+.progress-bar.bg-success { background-color: #22c55e; }
