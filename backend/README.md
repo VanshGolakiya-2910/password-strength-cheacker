@@ -36,10 +36,10 @@ cp .env.example .env
 
 4. Update `.env` with your MongoDB connection string and settings:
 ```
-PORT=5000
+PORT=3005
 MONGODB_URI=mongodb://localhost:27017/password-strength-checker
 NODE_ENV=development
-CORS_ORIGIN=http://localhost:4200
+ALLOWED_ORIGINS=http://localhost:3006
 ```
 
 ## Running the Server
@@ -54,7 +54,7 @@ npm run dev
 npm start
 ```
 
-The server will run on `http://localhost:5000`
+The server will run on `http://localhost:3005`
 
 ## API Endpoints
 
@@ -210,14 +210,14 @@ All endpoints return consistent error responses:
 
 ## CORS Configuration
 
-The backend is configured to accept requests from the frontend running on `http://localhost:4200`. Update the `CORS_ORIGIN` in `.env` to match your frontend URL.
+The backend is configured to accept requests from origins listed in `ALLOWED_ORIGINS` in `.env` (comma-separated).
 
 ## Environment Variables
 
-- `PORT` - Server port (default: 5000)
+- `PORT` - Server port (default: 3005)
 - `MONGODB_URI` - MongoDB connection string
 - `NODE_ENV` - Environment (development/production)
-- `CORS_ORIGIN` - Allowed origin for CORS requests
+- `ALLOWED_ORIGINS` - Allowed origins for CORS requests (comma-separated)
 
 ## License
 
