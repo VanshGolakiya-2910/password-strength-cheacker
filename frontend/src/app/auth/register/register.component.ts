@@ -78,7 +78,7 @@ export class RegisterComponent {
         },
         error: (error) => {
           this.isSubmitting = false;
-          this.errorMessage = error?.error?.message || 'Registration failed.';
+          this.errorMessage = 'Unable to create account right now. Please try again.';
         }
       });
   }

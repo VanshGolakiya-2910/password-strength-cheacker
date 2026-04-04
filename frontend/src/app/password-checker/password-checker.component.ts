@@ -275,9 +275,9 @@ export class PasswordCheckerComponent implements OnInit {
   copyToClipboard(): void {
     if (this.generatedPassword) {
       navigator.clipboard.writeText(this.generatedPassword).then(() => {
-        console.log('Password copied to clipboard');
+        this.saveMessage = 'Generated password copied to clipboard.';
       }).catch(err => {
-        console.error('Failed to copy password: ', err);
+        this.saveMessage = 'Unable to copy password. Please copy it manually.';
       });
     }
   }
@@ -339,7 +339,7 @@ export class PasswordCheckerComponent implements OnInit {
         this.loadSavedPasswords();
       },
       (error) => {
-        this.saveMessage = 'Error saving password: ' + error.error.message;
+        this.saveMessage = 'Unable to save password right now. Please try again.';
         this.isSaving = false;
       }
     );
@@ -353,7 +353,7 @@ export class PasswordCheckerComponent implements OnInit {
         this.isLoadingPasswords = false;
       },
       (error) => {
-        console.error('Error loading passwords:', error);
+        this.saveMessage = 'Unable to load saved passwords right now.';
         this.isLoadingPasswords = false;
       }
     );
@@ -373,7 +373,7 @@ export class PasswordCheckerComponent implements OnInit {
           this.loadSavedPasswords();
         },
         (error) => {
-          console.error('Error deleting password:', error);
+          this.saveMessage = 'Unable to delete password right now.';
         }
       );
     }

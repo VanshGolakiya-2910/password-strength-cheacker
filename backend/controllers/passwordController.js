@@ -44,8 +44,7 @@ exports.savePassword = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error saving password',
-      error: error.message
+      message: 'Unable to save password right now.'
     });
   }
 };
@@ -75,8 +74,7 @@ exports.getUserPasswords = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error retrieving passwords',
-      error: error.message
+      message: 'Unable to retrieve passwords right now.'
     });
   }
 };
@@ -98,8 +96,7 @@ exports.getPasswordById = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error retrieving password',
-      error: error.message
+      message: 'Unable to retrieve password right now.'
     });
   }
 };
@@ -126,8 +123,7 @@ exports.updatePassword = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error updating password',
-      error: error.message
+      message: 'Unable to update password right now.'
     });
   }
 };
@@ -149,8 +145,7 @@ exports.deletePassword = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error deleting password',
-      error: error.message
+      message: 'Unable to delete password right now.'
     });
   }
 };
@@ -217,8 +212,7 @@ exports.getPasswordStats = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error retrieving statistics',
-      error: error.message
+      message: 'Unable to retrieve statistics right now.'
     });
   }
 };
@@ -266,8 +260,7 @@ exports.searchPasswords = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error searching passwords',
-      error: error.message
+      message: 'Unable to search passwords right now.'
     });
   }
 };
@@ -285,8 +278,7 @@ exports.deleteAllUserPasswords = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error deleting passwords',
-      error: error.message
+      message: 'Unable to delete passwords right now.'
     });
   }
 };

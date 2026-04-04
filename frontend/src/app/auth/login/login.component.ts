@@ -42,7 +42,7 @@ export class LoginComponent {
       },
       error: (error) => {
         this.isSubmitting = false;
-        this.errorMessage = error?.error?.message || 'Login failed.';
+        this.errorMessage = 'Unable to sign in right now. Please check your credentials and try again.';
       }
     });
   }

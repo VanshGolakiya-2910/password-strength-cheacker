@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface PasswordRecord {
   _id?: string;
@@ -34,7 +35,8 @@ export interface PasswordStats {
   providedIn: 'root'
 })
 export class PasswordService {
-  private apiUrl = 'http://localhost:5000/api/passwords';
+  private apiUrl = `${environment.apiBaseUrl}/passwords`;
+  private dataApiUrl = `${environment.apiBaseUrl}/data`;
 
   constructor(private http: HttpClient) {}
 
@@ -89,12 +91,12 @@ export class PasswordService {
 
   // Export passwords as JSON
   exportPasswords(userId: string): Observable<any> {
-    return this.http.post(`http://localhost:5000/api/data/export`, { userId });
+    return this.http.post(`${this.dataApiUrl}/export`, { userId });
   }
 
   // Import passwords from JSON
   importPasswords(userId: string, passwords: PasswordRecord[]): Observable<any> {
-    return this.http.post(`http://localhost:5000/api/data/import`, {
+    return this.http.post(`${this.dataApiUrl}/import`, {
       userId,
       passwords
     });

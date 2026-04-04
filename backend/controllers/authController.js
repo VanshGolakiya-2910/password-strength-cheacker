@@ -5,7 +5,7 @@ const User = require('../models/User');
 const createToken = (user) => {
   return jwt.sign(
     { id: user._id, username: user.username, email: user.email },
-    process.env.JWT_SECRET || 'dev-secret',
+    process.env.JWT_SECRET,
     { expiresIn: '7d' }
   );
 };
@@ -58,7 +58,7 @@ exports.register = async (req, res) => {
       token
     });
   } catch (error) {
-    return res.status(500).json({ message: 'Error registering user', error: error.message });
+    return res.status(500).json({ message: 'Unable to complete registration right now.' });
   }
 };
 
@@ -99,7 +99,7 @@ exports.login = async (req, res) => {
       token
     });
   } catch (error) {
-    return res.status(500).json({ message: 'Error logging in', error: error.message });
+    return res.status(500).json({ message: 'Unable to log in right now.' });
   }
 };
 
@@ -126,6 +126,6 @@ exports.getCurrentUser = async (req, res) => {
       data: sanitizeUser(user)
     });
   } catch (error) {
-    return res.status(500).json({ message: 'Error retrieving user', error: error.message });
+    return res.status(500).json({ message: 'Unable to retrieve user details right now.' });
   }
 };

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 /**
- * @route   POST /api/export
+ * @route   POST /api/v1/data/export
  * @desc    Export user's passwords as JSON
  * @param   {string} userId - User ID
  * @return  {JSON} Exported passwords
@@ -27,14 +27,13 @@ router.post('/export', async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error exporting passwords',
-      error: error.message
+      message: 'Unable to export passwords right now.'
     });
   }
 });
 
 /**
- * @route   POST /api/import
+ * @route   POST /api/v1/data/import
  * @desc    Import passwords from JSON
  * @param   {string} userId - User ID
  * @param   {array} passwords - Array of password objects
@@ -65,8 +64,7 @@ router.post('/import', async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error importing passwords',
-      error: error.message
+      message: 'Unable to import passwords right now.'
     });
   }
 });

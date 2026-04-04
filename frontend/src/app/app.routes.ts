@@ -5,8 +5,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-	{ path: '', component: PasswordCheckerComponent, canActivate: [AuthGuard] },
-	{ path: 'login', component: LoginComponent },
-	{ path: 'register', component: RegisterComponent },
+	{ path: '', component: PasswordCheckerComponent, canActivate: [AuthGuard], title: 'Dashboard | VKarma Password Manager' },
+	{ path: 'login', component: LoginComponent, title: 'Sign In | VKarma Password Manager' },
+	{ path: 'register', component: RegisterComponent, title: 'Create Account | VKarma Password Manager' },
 	{ path: '**', redirectTo: '' }
 ];

@@ -19,7 +19,7 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET || 'dev-secret');
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.user = payload;
     return next();
   } catch (error) {

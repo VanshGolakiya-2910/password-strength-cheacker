@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AuthService, AuthUser } from './services/auth.service';
 
 @Component({
@@ -8,10 +10,14 @@ import { AuthService, AuthUser } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'password-strength-checker';
   currentUser: AuthUser | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
@@ -25,6 +31,18 @@ export class AppComponent implements OnInit {
         }
       });
     }
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        let route = this.activatedRoute;
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
+
+        const pageTitle = route.snapshot.title || 'Password Strength Checker';
+        this.titleService.setTitle(pageTitle);
+      });
   }
 
   logout(): void {

@@ -45,8 +45,7 @@ exports.createUser = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error creating user',
-      error: error.message
+      message: 'Unable to create user right now.'
     });
   }
 };
@@ -68,8 +67,7 @@ exports.getUserById = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error retrieving user',
-      error: error.message
+      message: 'Unable to retrieve user right now.'
     });
   }
 };
@@ -91,8 +89,7 @@ exports.getUserByUsername = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error retrieving user',
-      error: error.message
+      message: 'Unable to retrieve user right now.'
     });
   }
 };
@@ -119,8 +116,7 @@ exports.updateUser = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error updating user',
-      error: error.message
+      message: 'Unable to update user right now.'
     });
   }
 };
@@ -142,8 +138,7 @@ exports.deleteUser = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error deleting user',
-      error: error.message
+      message: 'Unable to delete user right now.'
     });
   }
 };
@@ -172,8 +167,7 @@ exports.getAllUsers = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Error retrieving users',
-      error: error.message
+      message: 'Unable to retrieve users right now.'
     });
   }
 };
